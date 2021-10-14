@@ -5,10 +5,27 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const user = require('./schema');
 const PORT = process.env.PORT || 4000;
-const { Auth } = require("two-step-auth");
+const {Auth, LoginCredentials} = require('two-step-auth')
 var otpuser =1234;
 app.use(cors());
 app.use(bodyParser.json());
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'rohithyalagam2001@gmail.com',
+    pass: 'Aa1@bcde'
+  }
+});
+
+var mailOptions = {
+  from: 'rohithyalagam2001@gmail.com',
+  to: 'rohith_y@ec.iitr.ac.in',
+  subject: 'Sending Email using Node.js',
+  text: 'That was easy!'
+};
+
 
 // mongodb connection
 const mongo_url ='mongodb+srv://rohith_yelagam:Aa1%40bcde@cluster0.tnpyv.mongodb.net/arenaDB?retryWrites=true&w=majority';
@@ -27,11 +44,11 @@ two = ()=>{
     console.log("otp : "+otpuser);
 }
 
-async function login(emailId){
-    const res = await Auth(emailId, "Spark-portal");
-    otpuser = res.OTP;
-    return res.OTP;
-  }
+// async function login(emailId){
+    
+//     otpuser = res.OTP;
+//     return res.OTP;
+//   }
 
 // add new user
 app.post('/new/user', (req, res) => {
@@ -98,11 +115,19 @@ app.post('/forgot/user', (req, res) => {
                 console.log("invalid email");
                 res.status(201).send(data);
             }else{
-                var otp;
-                 login(userd.email).then((data)=>{
-                    res.status(201).send(data);
-                 });
-                 res.status(201).send(otp);
+                console.log("otp");
+                transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                  });
+                // Auth(userd.email, "Spark-portal").then((otp)=>{
+                //     res.status(201).send(otp);
+                // });
+                
+                res.status(201).send("");
             }
 
         }
@@ -110,8 +135,8 @@ app.post('/forgot/user', (req, res) => {
     
 })
 
-// get otp
-app.post('/forgot/otp', (req, res) => {
+// get password
+app.post('/get/pswd', (req, res) => {
     let userd=req.body;
     user.findOne({
         'email' : userd.email
@@ -119,15 +144,7 @@ app.post('/forgot/otp', (req, res) => {
         if (err) {
             res.status(500).send(err);
         } else {
-            if(data==null){
-                console.log("invalid email");
-                res.status(201).send(data);
-            }else{
-                login(userd.email);
-                
-                res.status(201).send(data);
-            }
-
+           res.status(201).send(data.password);
         }
     })
     
@@ -135,3 +152,4 @@ app.post('/forgot/otp', (req, res) => {
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });
+
