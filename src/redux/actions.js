@@ -1,6 +1,9 @@
-export function login() {
+export function login(firstName,lastName,email,password) {
    return {
-      type: 'LOGIN'
+      type: 'LOGIN',
+      payload : {
+         firstName,lastName,email,password
+      }
    }
 }
 export function logout() {

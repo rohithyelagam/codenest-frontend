@@ -1,17 +1,40 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { closeSignup, login, openSignup, logout, openForgot } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {  login, openSignup, openForgot } from "../redux/actions";
+import axios from "axios";
 import "./login.css";
 
 function Login() {
+  const [invalid,setInvalid] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const dispatch = useDispatch();
+  const handlesubmit = ()=>{
+    axios.post('http://localhost:4000/login/user',{
+      email:email,
+      password:password
+    }).then((res)=>{
+      if(res.data){
+       setInvalid(false);
+        setEmail(res.data.email);
+        setPassword(res.data.password);
+        localStorage.setItem('user',"true"); 
+        localStorage.setItem('firstName',res.data.firstName);
+        localStorage.setItem('lastName',res.data.lastName);
+        localStorage.setItem('email',email);
+        localStorage.setItem('password',password);
+        dispatch(login(res.data.firstName,res.data.lastName,res.data.email,res.data.password));
+      }else{
+        setInvalid(true);
+        console.log("invalid credidentials!");
+      }
+        
+    })
+   
+    
+  }
 
-  const handleSubmit = () => {
-    dispatch(login());
-  };
+
   const handlesignup = () => {
     dispatch(openSignup());
   }
@@ -28,11 +51,17 @@ function Login() {
   return (
    
     <div className="login">
-      <div className="login-wrapper">
+      <div className="login-wrapper" onClick={()=>setInvalid(false)}>
         <div className="login-title">Spark Portal</div>
 
         <div >
-          <form className="login-form" onSubmit={handleSubmit}>
+          <div className="login-form" >
+          
+            {(invalid)?(
+              <div className="invalidmsg">email or password is incorrect!</div>
+            ):(
+              <div></div>
+            )}
             
             <div className="email">
              <input
@@ -41,6 +70,7 @@ function Login() {
                 value={email}
                 onChange={handleChange}
                 placeholder="email"
+                
               />
             </div>
 
@@ -51,14 +81,15 @@ function Login() {
                 value={password}
                 onChange={handleChange2}
                 placeholder="password"
+                
               />
             </div>
 
             <div className="submit">
-            <input  type="submit" value="Log in" />
+            <button onClick={handlesubmit} >Log in</button>
             </div>
 
-          </form>
+          </div>
         </div>
 
         <div className="login-bottom">

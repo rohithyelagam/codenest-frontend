@@ -2,7 +2,19 @@ const initial_state = {
   isLoggedin: false,
   onSignup:true,
   forgot:false,
+  user:{
+    firstName:"",
+    lastName:"",
+    email:"",
+    password:""
+  }
 };
+const state2 = {
+   firstName:"",
+    lastName:"",
+    email:"",
+    password:""
+}
 
 const reducer = (state = initial_state, action) => {
   switch (action.type) {
@@ -10,11 +22,13 @@ const reducer = (state = initial_state, action) => {
       return {
         isLoggedin: true,
         onSignup:false,
+        user:action.payload
       };
     case "LOGOUT":
       return {
         isLoggedin: false,
         onSignup:false,
+        user:state2
       };
     case "CREATE_SIGNUP":
       return {
@@ -38,6 +52,7 @@ const reducer = (state = initial_state, action) => {
           isLoggedin:state.isLoggedin,
           forgot:false
       }
+    
     default:
       return state;
   }

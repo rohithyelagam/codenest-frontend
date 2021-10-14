@@ -5,7 +5,7 @@
     padding-top: 50px;
     padding-bottom: 50px;
 }
-.signup-wrapper{
+ .signup-wrapper{
     width: 400px;
     background-color: white;
     padding: 30px;
@@ -14,57 +14,68 @@
     flex-direction: column;
 }
 
-.names{
-    width: 100%;
+.signup-names{
     display: flex;
-    justify-content: space-between;
+    /* background-color: aqua; */
+    height: 40px;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
 }
-.firstName>input{
-    /* width: 250px; */
-    height: 35px;
-    /* font-size: 16px; */
-    padding-left: 10px;
+
+.signup-firstName>input{
+    border-radius: 2px;
+    height: 30px;
     border: none;
     background-color: #f2f2f2;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-bottom: 20px;
-}
-.lastName>input{
-    height: 35px;
-    /* font-size: 16px; */
     padding-left: 10px;
+} 
+.signup-lastName>input{
+    border-radius: 2px;
+    height: 30px;
     border: none;
     background-color: #f2f2f2;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-bottom: 20px;
+    padding-left: 10px;
+} 
+
+.err{
+    margin-top: 6px;
+    font-size: small;
+    color: #f81d1d;
+    text-align: center;
+    /* margin-bottom: 4px; */
 }
 .signup-email>input{
-    width: 388px;
+    margin-top: 15px;
+    width: 362px;
     height: 35px;
-    font-size: 16px;
     padding-left: 10px;
     border: none;
+    border-radius: 2px;
     background-color: #f2f2f2;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
 .signup-password>input{
-    width: 388px;
+    width: 362px;
     height: 35px;
-    font-size: 16px;
     padding-left: 10px;
     border: none;
     background-color: #f2f2f2;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-top: 20px;
+    border-radius: 2px;
 }
-.signup-submit>input{
-    width: 400px;
-    height: 40px;
-    font-size: 16px;
+
+.signup-submit>button{
+    width: 373px;
+    height: 35px;
     padding: 5px;
     color: white;
     background-color: #0084A8;
@@ -74,11 +85,12 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-top: 40px;
 }
-.signup-submit>input:hover{
+
+.signup-submit>button:hover{
     background-color: #0091b9;
     cursor: pointer;
     border-radius: 2px;
 }
 .login-link{
     cursor: pointer;
-}
+} 

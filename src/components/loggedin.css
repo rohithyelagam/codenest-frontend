@@ -1,0 +1,56 @@
+.loggedin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    margin-top: 100px;
+    width: 350px;
+    border-radius: 2px;
+    padding: 5px;
+}
+.header{
+    text-align: center;
+    margin-top: 20px;
+    font-size: larger;
+}
+.photo{
+    margin-top: 20px;
+}
+.photo:hover{
+    cursor: pointer;
+}
+
+.names{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 200px;
+    font-weight: 250;
+    padding:  0px 10px;
+}
+.email{
+    font-weight: 250;
+    margin-bottom: 20px;
+}
+.footer>button{
+    outline: none;
+    border: none;
+    margin-bottom: 15px;
+    color: #0084A8;
+    background-color: white;
+    padding: 2px 5px 2px 5px;
+    border-radius: 2px;
+}
+.footer>button:hover{
+    cursor: pointer;
+    background-color: #02abda;
+    color: white;
+}
+
+
