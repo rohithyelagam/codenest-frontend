@@ -6,26 +6,67 @@ const mongoose = require('mongoose');
 const user = require('./schema');
 const PORT = process.env.PORT || 4000;
 const {Auth, LoginCredentials} = require('two-step-auth')
-var otpuser =1234;
 app.use(cors());
 app.use(bodyParser.json());
-var nodemailer = require('nodemailer');
 
+LoginCredentials.mailID = "rohithyalagam2001@gmail.com"
+LoginCredentials.password = "Aa1@bcde"
+LoginCredentials.use = true
+
+// 
+var nodemailer = require('nodemailer');
+var otp,msg;
+const create_msg=()=>{
+    msg = '<div style="font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2">'+
+    '<div style="margin:50px auto;width:70%;padding:20px 0">'+
+      '<div style="border-bottom:1px solid #eee">'+
+        '<a href="" style="font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600">Spark Portal</a>'+
+      '</div>'+
+      '<p style="font-size:1.1em">Hello,</p>'+
+      '<p>Thank you for choosing Spark-Portal. Use the following OTP to complete your Sign Up procedures.</p>'+
+      `<h2 style="background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;">${otp}</h2>`+
+      '<p style="font-size:0.9em;">Regards,<br />Rohith Yelagam</p>'+
+      '<hr style="border:none;border-top:1px solid #eee" />'+
+      '<div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">'+
+        '<p>Spark Portal Inc</p>'+
+        '<p>Roorkee, Haridwar</p>'+
+        '<p>Uttarakhand</p>'+
+      '</div>'+
+    '</div>'+
+    '</div>';
+}
+const create_otp=()=>{
+    otp = Math.floor(Math.random()*90000) + 10000;
+    create_msg();
+}
+ 
 var transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: 'rohithyalagam2001@gmail.com',
-    pass: 'Aa1@bcde'
-  }
+ service: 'gmail',
+ auth: {
+        user: 'rohithyalagam2001@gmail.com',			//email ID
+	    pass: 'Aa1@bcde'				//Password 
+    }
 });
 
-var mailOptions = {
-  from: 'rohithyalagam2001@gmail.com',
-  to: 'rohith_y@ec.iitr.ac.in',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!'
-};
+function sendMail(email , emsg){
+	var details = {
+		from: 'rohithyalagam2001@gmail.com', // sender address same as above
+		to: email, 					// Receiver's email id
+		subject: 'Your demo OTP is ', // Subject of the mail.
+		html: emsg				// Sending OTP 
+	};
 
+
+	transporter.sendMail(details, function (error, data) {
+		if(error)
+			console.log(error)
+		else
+			console.log(data);
+		});
+	}
+	
+	
+	
 
 // mongodb connection
 const mongo_url ='mongodb+srv://rohith_yelagam:Aa1%40bcde@cluster0.tnpyv.mongodb.net/arenaDB?retryWrites=true&w=majority';
@@ -39,16 +80,6 @@ const connection = mongoose.connection;
 connection.once('open', function() {
     console.log("MongoDB database connection established successfully");
 })
-
-two = ()=>{
-    console.log("otp : "+otpuser);
-}
-
-// async function login(emailId){
-    
-//     otpuser = res.OTP;
-//     return res.OTP;
-//   }
 
 // add new user
 app.post('/new/user', (req, res) => {
@@ -116,18 +147,13 @@ app.post('/forgot/user', (req, res) => {
                 res.status(201).send(data);
             }else{
                 console.log("otp");
-                transporter.sendMail(mailOptions, function(error, info){
-                    if (error) {
-                      console.log(error);
-                    } else {
-                      console.log('Email sent: ' + info.response);
-                    }
-                  });
-                // Auth(userd.email, "Spark-portal").then((otp)=>{
-                //     res.status(201).send(otp);
-                // });
+                create_otp();
+                sendMail(userd.email,msg);
+                const obj ={
+                    otp:otp
+                }
+                res.status(201).send(obj);
                 
-                res.status(201).send("");
             }
 
         }
