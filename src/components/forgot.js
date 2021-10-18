@@ -53,24 +53,25 @@ function Login() {
   const handleSubmit = () => {
     if(handleerr()){
       setDes("loading")
-      axios.post('https://spark-portal.herokuapp.com/forgot/user',{
+      axios.post('https://spark-portal-backend.herokuapp.com/forgot/user',{
         email:email
       }).then((res)=>{
-        // console.log(res.data);
-        setSotp(res.data.OTP);
+        console.log(res.data);
+        setSotp(res.data.otp);
         setDes("sucess");
-        console.log(res.data.OTP);
+        // console.log(res.data.OTP);
       })
       // closeforgot();
     }
 };
 
   const handleSubmit2 = ()=>{
-    
+      console.log(sotp);
+      console.log(otp);
     if(sotp != otp){
       setErr("wrong");
     }else{
-      axios.post('https://spark-portal.herokuapp.com/get/pswd',{
+      axios.post('https://spark-portal-backend.herokuapp.com/get/pswd',{
         email:email
       }).then((res)=>{
         setPswd(res.data);

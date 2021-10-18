@@ -61,7 +61,7 @@ function Signup() {
 
   const handleSubmit = () =>{
     if(handle_all_errors()){
-      axios.post('https://spark-portal.herokuapp.com/new/user',{
+      axios.post('https://spark-portal-backend.herokuapp.com/new/user',{
         firstName:firstName,
         lastName:lastName,
         email:email,

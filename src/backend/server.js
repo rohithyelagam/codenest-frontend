@@ -41,18 +41,21 @@ const create_otp=()=>{
 }
  
 var transporter = nodemailer.createTransport({
- service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    service : 'Gmail',
  auth: {
-        user: 'rohithyalagam2001@gmail.com',			//email ID
+        user: 'rohith_y@ec.iitr.ac.in',			//email ID
 	    pass: 'Aa1@bcde'				//Password 
     }
 });
 
 function sendMail(email , emsg){
 	var details = {
-		from: 'rohithyalagam2001@gmail.com', // sender address same as above
+		from: 'rohith_y@ec.iitr.ac.in', // sender address same as above
 		to: email, 					// Receiver's email id
-		subject: 'Your demo OTP is ', // Subject of the mail.
+		subject: 'Your OTP is ', // Subject of the mail.
 		html: emsg				// Sending OTP 
 	};
 
