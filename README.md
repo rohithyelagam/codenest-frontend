@@ -2,6 +2,8 @@
 
 This project is a simple demonstration of user login built with React, Redux, JavaScript.
 
+Check the live demo <a href="https://rohithyelagam.github.io/Spark-portal/">here</a>
+
 ## Installation and Setup Instructions
 
 Clone down this repository. You will need node ,npm and yarn installed globally on your machine.
