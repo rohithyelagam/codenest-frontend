@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/Spark-portal/static/css/main.f701cc3d.chunk.css",
-    "main.js": "/Spark-portal/static/js/main.d3793b62.chunk.js",
-    "main.js.map": "/Spark-portal/static/js/main.d3793b62.chunk.js.map",
+    "main.css": "/Spark-portal/static/css/main.8e9bf208.chunk.css",
+    "main.js": "/Spark-portal/static/js/main.8cd81cdf.chunk.js",
+    "main.js.map": "/Spark-portal/static/js/main.8cd81cdf.chunk.js.map",
     "runtime-main.js": "/Spark-portal/static/js/runtime-main.7d375ba6.js",
     "runtime-main.js.map": "/Spark-portal/static/js/runtime-main.7d375ba6.js.map",
-    "static/js/2.fbb51f63.chunk.js": "/Spark-portal/static/js/2.fbb51f63.chunk.js",
-    "static/js/2.fbb51f63.chunk.js.map": "/Spark-portal/static/js/2.fbb51f63.chunk.js.map",
+    "static/js/2.0e8e8f2a.chunk.js": "/Spark-portal/static/js/2.0e8e8f2a.chunk.js",
+    "static/js/2.0e8e8f2a.chunk.js.map": "/Spark-portal/static/js/2.0e8e8f2a.chunk.js.map",
     "index.html": "/Spark-portal/index.html",
-    "static/css/main.f701cc3d.chunk.css.map": "/Spark-portal/static/css/main.f701cc3d.chunk.css.map",
-    "static/js/2.fbb51f63.chunk.js.LICENSE.txt": "/Spark-portal/static/js/2.fbb51f63.chunk.js.LICENSE.txt"
+    "static/css/main.8e9bf208.chunk.css.map": "/Spark-portal/static/css/main.8e9bf208.chunk.css.map",
+    "static/js/2.0e8e8f2a.chunk.js.LICENSE.txt": "/Spark-portal/static/js/2.0e8e8f2a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.7d375ba6.js",
-    "static/js/2.fbb51f63.chunk.js",
-    "static/css/main.f701cc3d.chunk.css",
-    "static/js/main.d3793b62.chunk.js"
+    "static/js/2.0e8e8f2a.chunk.js",
+    "static/css/main.8e9bf208.chunk.css",
+    "static/js/main.8cd81cdf.chunk.js"
   ]
 }
