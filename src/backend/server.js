@@ -5,14 +5,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const user = require('./schema');
 const PORT = process.env.PORT || 4000;
-const {Auth, LoginCredentials} = require('two-step-auth')
 app.use(cors());
 app.use(bodyParser.json());
 
-LoginCredentials.mailID = "rohithyalagam2001@gmail.com"
-LoginCredentials.password = "Aa1@bcde"
-LoginCredentials.use = true
-
+// 
 // 
 var nodemailer = require('nodemailer');
 var otp,msg;
@@ -178,6 +174,8 @@ app.post('/get/pswd', (req, res) => {
     })
     
 })
+
+
 app.listen(PORT, function() {
     console.log("Server is running on Port: " + PORT);
 });

@@ -1,20 +1,25 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {  login, openSignup, openForgot } from "../redux/actions";
+import {LinearProgress} from '@mui/material';
 import axios from "axios";
 import "./login.css";
 
 function Login() {
   const [invalid,setInvalid] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const handlesubmit = ()=>{
+    setLoading(true);
     axios.post('https://spark-portal-backend.herokuapp.com/login/user',{
       email:email,
       password:password
     }).then((res)=>{
+      setLoading(false);
       if(res.data){
+        
        setInvalid(false);
         setEmail(res.data.email);
         setPassword(res.data.password);
@@ -51,66 +56,72 @@ function Login() {
   return (
    
     <div className="login">
-      <div className="login-wrapper" onClick={()=>setInvalid(false)}>
-        <div className="login-title">Spark Portal</div>
-
-        <div >
-          <div className="login-form" >
-          
-            {(invalid)?(
-              <div className="invalidmsg">email or password is incorrect!</div>
-            ):(
-              <div></div>
-            )}
+       {(loading)?(
+          <div className="loading-login"><LinearProgress/></div>
+        ):(
+          <div className="login-wrapper" onClick={()=>setInvalid(false)}>
+       
+          <div className="login-title">Spark Portal</div>
+  
+          <div >
+            <div className="login-form" >
             
-            <div className="email">
-             <input
-                type="text"
-                name="email"
-                value={email}
-                onChange={handleChange}
-                placeholder="email"
-                
-              />
+              {(invalid)?(
+                <div className="invalidmsg">email or password is incorrect!</div>
+              ):(
+                <div></div>
+              )}
+              
+              <div className="email">
+               <input
+                  type="text"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                  placeholder="email"
+                  
+                />
+              </div>
+  
+              <div className="password">
+                <input
+                  type="text"
+                  name="password"
+                  value={password}
+                  onChange={handleChange2}
+                  placeholder="password"
+                  
+                />
+              </div>
+  
+              <div className="submit">
+              <button onClick={handlesubmit} >Log in</button>
+              </div>
+  
             </div>
-
-            <div className="password">
-              <input
-                type="text"
-                name="password"
-                value={password}
-                onChange={handleChange2}
-                placeholder="password"
-                
-              />
+          </div>
+  
+          <div className="login-bottom">
+            <div className="forgot-password">
+              Forgot{" "}
+              <a onClick={handleforgot} className="forgot-link">
+                Password
+              </a>
+              ?
             </div>
-
-            <div className="submit">
-            <button onClick={handlesubmit} >Log in</button>
+            
+            <div className="sign-up">
+              Don't have an account?{" "}
+             
+              <a onClick={handlesignup} className="signup-link">
+                Sign up
+              </a>
+             
             </div>
-
           </div>
         </div>
-
-        <div className="login-bottom">
-          <div className="forgot-password">
-            Forgot{" "}
-            <a onClick={handleforgot} className="forgot-link">
-              Password
-            </a>
-            ?
-          </div>
-          
-          <div className="sign-up">
-            Don't have an account?{" "}
-           
-            <a onClick={handlesignup} className="signup-link">
-              Sign up
-            </a>
-           
-          </div>
-        </div>
-      </div>
+        )}
+      
      
     </div>
     
