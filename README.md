@@ -1,4 +1,4 @@
-# Spark-Portal
+# codenest-frontend
 
 This project is a simple demonstration of user login built with React, Redux, JavaScript.
 
