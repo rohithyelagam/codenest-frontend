@@ -6,28 +6,11 @@ import { debounce } from "lodash";
 
 export default function Search(){
 
-    const [problems,setProblems] = useState([
-        {
-            name: "Weird Algorithm",
-            category: "Introductory Problems",
-            link: "/problemset/task/1068",
-            detail: "103929 / 108832",
-            score: 15
-        },
-        {
-            name: "Programmers and Artists",
-            category: "Additional Problems",
-            link: "/problemset/task/2426",
-            detail: "335 / 429",
-            score: 8
-        }
-    ]);
+    const [problems,setProblems] = useState([]);
 
     const searchText = async (s)=>{
         if(s!=""){
-            console.log(s);
             const resp = await codenest.post('http://localhost:4000/codenest/cses/search',{problem:s},{});
-            console.log("response : ",resp);
             if(resp.status == 200){
                 setProblems(resp.data.message);
             }
