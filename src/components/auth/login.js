@@ -32,7 +32,6 @@ function Login() {
         addCokkie("token",res.data.message);
         removeCokkie("pswd")
         removeCokkie("username");
-        removeCokkie("email");
         navigator("/");
       }
     } catch (err) {

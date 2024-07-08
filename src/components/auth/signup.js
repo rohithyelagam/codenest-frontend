@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
-import "../../styles/signup.css";
 import {useNavigate} from 'react-router-dom';
 import {addCokkie} from "../../utils/common";
+import "../../styles/signup.css";
 function Signup() {
 
   const navigator = useNavigate();
