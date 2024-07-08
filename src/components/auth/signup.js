@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { closeSignup, login } from "../../redux/actions";
 import axios from "axios";
 import "../../styles/signup.css";
 import {useNavigate} from 'react-router-dom';

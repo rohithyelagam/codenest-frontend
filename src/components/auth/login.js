@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { login, openSignup, openForgot } from "../../redux/actions";
 import { LinearProgress } from '@mui/material';
 import axios from "axios";
 import "../../styles/login.css";
