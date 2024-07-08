@@ -1,56 +1,32 @@
-import React, { useState,useEffect } from 'react';
-import {useSelector} from 'react-redux';
-import Login from "./components/login";
-import Loggedin from "./components/loggedin";
-import Signup from "./components/signup";
-import Forgot from "./components/forgot";
-import './App.css';
-import { useDispatch } from 'react-redux';
-import { login } from './redux/actions';
+import React, { useEffect, useState } from 'react';
+import {Navigate, Route, Routes} from 'react-router-dom';
+import './styles/App.css';
+import Home from './components/Home';
+import NotFound from './components/NotFound';
+import Login from './components/auth/login';
+import SignUp from './components/auth/signup';
+import Forgot from './components/auth/forgot';
+import OTP from './components/auth/otp';
+import Search from './components/cses/search/Search';
+import Coderunner from './components/cses/coderunner/coderunner';
+import Submissions from './components/cses/submissions/submissions';
 
 function App(){
 
-  var isLoggedin = useSelector((state)=>state.isLoggedin);
-  
-  var onSignup = useSelector((state)=> state.onSignup);
-  var forgot = useSelector((state)=>state.forgot);
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    const loggedInUser = localStorage.getItem("user");
-    const fn = localStorage.getItem("firstName");
-    const ln = localStorage.getItem("lastName");
-    const em = localStorage.getItem("email");
-    const ps = localStorage.getItem("password");
-    if(loggedInUser){
-      isLoggedin=loggedInUser;
-      dispatch(login(fn,ln,em,ps));
-    }
-    
-  }, [])
-
     return (
       <div className="App">
-        {(forgot)?(
-            <Forgot/>
-        ):(
-          <div>
-            {(isLoggedin)?(
-            <div className="logged-in">
-              {(onSignup === true)?(
-                <div><Signup/></div>
-              ):(
-                <div><Loggedin isLoggedin={isLoggedin} /></div>
-              )}
-            </div>
-          ):(
-            <div className="login">
-              <Login isLoggedin={isLoggedin}/>
-            </div>
-          )}
-           </div>
-        )}
-         
+        <Routes>
+          <Route path='/' element={<Home/>}>
+            <Route path='' element={<Search/>}/>
+            <Route path='execute' element={<Coderunner />} />
+            <Route path='submissions' element={<Submissions />} />
+          </Route>
+          <Route path='login' element={<Login/>}/>
+          <Route path='signup' element={<SignUp/>}/>
+          <Route path='forgot' element={<Forgot/>}/>
+          <Route path="otp" element={<OTP/>}/>
+          <Route path="*" element={<NotFound/>}/>
+        </Routes>
       </div>
     );
 }

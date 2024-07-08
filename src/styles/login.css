@@ -144,3 +144,36 @@
     width: 160px;
     background-color: rgba(144, 238, 144, 0.541);
 }
+.otp{
+    width: 250px;
+    height: 50px;
+    font-size: 40px;
+    caret-color: transparent;
+    letter-spacing: 8px;
+    /* padding: 10px; */
+    text-align: center;
+}
+.resend-otp>a{
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 105px;
+    height: 40px;
+}
+.sign-up-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 105px;
+    height: 40px;
+}
+.sucessmsg{
+    background-color: rgba(0, 255, 38, 0.479);
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

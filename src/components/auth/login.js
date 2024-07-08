@@ -1,106 +1,104 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  login, openSignup, openForgot } from "../../redux/actions";
-import {LinearProgress} from '@mui/material';
+import { login, openSignup, openForgot } from "../../redux/actions";
+import { LinearProgress } from '@mui/material';
 import axios from "axios";
-import "./login.css";
+import "../../styles/login.css";
+import codenest from "../../services/codenest";
+import { useNavigate } from "react-router-dom";
+import { addCokkie, removeCokkie } from "../../utils/common";
 
 function Login() {
-  const [invalid,setInvalid] = useState(false);
-  const [loading,setLoading] = useState(false);
+
+  const [invalid, setInvalid] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
-  const handlesubmit = ()=>{
+
+  const navigator = useNavigate();
+
+  const handlesubmit = async () => {
+
     setLoading(true);
-    axios.post('https://spark-portal-backend.herokuapp.com/login/user',{
-      email:email,
-      password:password
-    }).then((res)=>{
-      setLoading(false);
-      if(res.data){
-        
-       setInvalid(false);
-        setEmail(res.data.email);
-        setPassword(res.data.password);
-        localStorage.setItem('user',"true"); 
-        localStorage.setItem('firstName',res.data.firstName);
-        localStorage.setItem('lastName',res.data.lastName);
-        localStorage.setItem('email',email);
-        localStorage.setItem('password',password);
-        dispatch(login(res.data.firstName,res.data.lastName,res.data.email,res.data.password));
-      }else{
-        setInvalid(true);
-        console.log("invalid credidentials!");
+
+    let data = {
+      email: email,
+      password: password
+    }
+
+    try {
+      const res = await axios.post('http://localhost:4000/codenest/auth/v1/login', data);
+      if (res.data) {
+        setInvalid(false);
+        setLoading(false);
+        addCokkie("token",res.data.message);
+        removeCokkie("pswd")
+        removeCokkie("username");
+        removeCokkie("email");
+        navigator("/");
       }
-        
-    })
-   
-    
+    } catch (err) {
+      setInvalid(true);
+      setLoading(false);
+      console.log("invalid credidentials!");
+    }
+
   }
 
 
   const handlesignup = () => {
-    dispatch(openSignup());
+    navigator("/signup");
   }
-  const handleforgot = ()=>{
-    dispatch(openForgot());
+  const handleforgot = () => {
+    navigator("/forgot");
   }
-  const handleChange = (e) => {
-    setEmail(e.target.value);
-  };
-  const handleChange2 = (e) => {
-    setPassword(e.target.value);
-  };
 
   return (
-   
+
     <div className="login">
-       {(loading)?(
-          <div className="loading-login"><LinearProgress/></div>
-        ):(
-          <div className="login-wrapper" onClick={()=>setInvalid(false)}>
-       
-          <div className="login-title">Spark Portal</div>
-  
-          <div >
+      {(loading) ? (
+        <div className="loading-login"><LinearProgress /></div>
+      ) : (
+        <div className="login-wrapper" onClick={() => setInvalid(false)}>
+
+          <div className="login-title">CODENEST</div>
+
+          <form>
             <div className="login-form" >
-            
-              {(invalid)?(
+
+              {(invalid) ? (
                 <div className="invalidmsg">email or password is incorrect!</div>
-              ):(
+              ) : (
                 <div></div>
               )}
-              
+
               <div className="email">
-               <input
+                <input
                   type="text"
                   name="email"
-                  value={email}
-                  onChange={handleChange}
+                  onChange={(e) => setEmail(e.target.value)}
                   placeholder="email"
-                  
+
                 />
               </div>
-  
+
               <div className="password">
                 <input
                   type="text"
                   name="password"
                   value={password}
-                  onChange={handleChange2}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="password"
-                  
+
                 />
               </div>
-  
+
               <div className="submit">
-              <button onClick={handlesubmit} >Log in</button>
+                <button type="submit" onClick={handlesubmit} >Log in</button>
               </div>
-  
+
             </div>
-          </div>
-  
+          </form>
           <div className="login-bottom">
             <div className="forgot-password">
               Forgot{" "}
@@ -109,22 +107,22 @@ function Login() {
               </a>
               ?
             </div>
-            
+
             <div className="sign-up">
               Don't have an account?{" "}
-             
+
               <a onClick={handlesignup} className="signup-link">
                 Sign up
               </a>
-             
+
             </div>
           </div>
         </div>
-        )}
-      
-     
+      )}
+
+
     </div>
-    
+
   );
 }
 

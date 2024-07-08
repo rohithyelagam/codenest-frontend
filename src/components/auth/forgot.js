@@ -1,24 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import {closeForgot} from "../../redux/actions";
 import {LinearProgress} from '@mui/material';
 import axios from "axios";
-import "./login.css";
+import "../../styles/login.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState();
-  const [des,setDes] = useState("none");
-  const [sotp,setSotp] = useState();
-  const [err,setErr] = useState("none");
-  const [email_err,setEmail_err] = useState("none");
-  const [pswd,setPswd] = useState("");
+  const [email_err,setEmail_err] = useState(null);
+  const [valid,setValid] = useState(false);
 
-  const dispatch = useDispatch();
+  const navigator = useNavigate();
 
   const handleerr=()=>{
     if(email==""){
-        setEmail_err("true");
+        setEmail_err("Email adress is invalid");
         return false;
     }else{
       var n = email.length;
@@ -31,7 +27,7 @@ function Login() {
         }
       }
       if(d!=2){
-        setEmail_err("true");
+        setEmail_err("Email adress is invalid");
         return false;
       }
     }
@@ -39,55 +35,21 @@ function Login() {
   }
 
   const closeerr=()=>{
-    setDes("none");
-    setErr("none");
-    setOtp();
-    setSotp();
-    setPswd("");
-    setEmail_err("none");
+    setEmail_err(null);
   }
-
-  const closeforgot = ()=>{
-    dispatch(closeForgot());
-  }
-  const handleSubmit = () => {
-    if(handleerr()){
-      setDes("loading")
-      axios.post('https://spark-portal-backend.herokuapp.com/forgot/user',{
-        email:email
-      }).then((res)=>{
-        console.log(res.data);
-        setSotp(res.data.otp);
-        setDes("sucess");
-        // console.log(res.data.OTP);
-      })
-      // closeforgot();
-    }
-};
 
   const handleSubmit2 = ()=>{
-      console.log(sotp);
-      console.log(otp);
-    if(sotp != otp){
-      setErr("wrong");
-    }else{
-      axios.post('https://spark-portal-backend.herokuapp.com/get/pswd',{
+    if(handleerr()){
+      axios.post('http://localhost:4000/codenest/auth/v1/forgot', {
         email:email
-      }).then((res)=>{
-        setPswd(res.data);
-        setErr("correct");
+      }).then((resp)=>{
+        setValid(true);
+        setTimeout(()=>navigator("/login"),3000);
+      }).catch((err)=>{
+        setEmail_err("Email Addres doesn't exists!");
       })
     }
   }
-
-  const handleChange = (e) => {
-    if(e.target.name=="email"){
-      setEmail(e.target.value);
-    }else{
-      setOtp(e.target.value);
-    }
-    
-  };
 
 
   return (
@@ -96,59 +58,45 @@ function Login() {
       <div className="login-wrapper">
         <div className="login-title">Forgot Password</div>
         <div className="forgot-des">
+        {(!valid) ? (
             <p>Enter your email address</p>
+          ) : (
+            <div></div>
+          )}
+            
         </div>
-
-
         <div >
           <div className="login-form">
+
+          {(valid) ? (
+            <div className="sucessmsg">Password Sent to Email</div>
+          ) : (
+            <div></div>
+          )}
             
             <div className="email">
              <input
                 type="text"
                 name="email"
                 value={email}
-                onChange={handleChange}
+                onChange={(e)=>setEmail(e.target.value)}
                 onClick={closeerr}
                 placeholder="email"
               />
             </div>
-            {(email_err==="true")?(<div className="otperr">Email adress is invalid</div>):(<div></div>)}
-            {(des=="loading")?(<div className="loading"><LinearProgress/></div>):(<div></div>)}
-            {(des=="sucess")?(
 
-              <div className="otp">
-              <input
-                type="text"
-                name="otp"
-                value={otp}
-                onChange={handleChange}
-                placeholder="OTP"
-              />
-
-            </div>
-            ):(
-              <div></div>
-            )}
-            {(err==="correct")?(<div className="sucess">Password: {pswd}</div>):(<div></div>)}
-            {(err==="wrong")?(<div className="otperr">OTP desen't match</div>):(<div></div>)}
+            {(email_err)?(<div className="otperr">{email_err}</div>):(<div></div>)}
               
             <div className="submit">
-              {(des==="sucess")?(
               <button className="recover-pswd" onClick={handleSubmit2}>Recover Password</button>
-              ):(
-              <button className="recover-pswd" onClick={handleSubmit}>Get OTP</button>
-              )}
-
             </div>
 
           </div>
-
-          </div>
-          <div className="login-bottom">
+        </div>
+        <div className="login-bottom">
           <div className="forgot-password">
            Back to{" "}
-            <a onClick={closeforgot} className="forgot-link">
+            <a onClick={()=>navigator("/login")} className="forgot-link">
              Log in
             </a>
             ?
