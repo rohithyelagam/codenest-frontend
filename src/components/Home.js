@@ -18,7 +18,7 @@ export default function Home() {
             return;
         }
 
-        axios.post('http://localhost:4000/codenest/auth/v1/validateToken', { token })
+        axios.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/validateToken', { token })
             .then((resp) => {
                 if (!resp.data.message) {
                     navigate("/login");

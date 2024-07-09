@@ -14,11 +14,11 @@ export default function Coderunner(){
     const [tempCode,setTempCode] = useState();
     const [tempLang,setTempLang] = useState("CPP");
     const [trigger,setTrigger] = useState(false);
-    const [sameTrigger,setSameTrigger] = useState(false);
+    const [sametrigger,setSametrigger] = useState(false);
 
     const getProblem = async (id)=>{
         setProblemId(id);
-        const resp = await codenest.post('http://localhost:4000/codenest/cses/getProblem',{problemId:id},{});
+        const resp = await codenest.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/cses/getProblem',{problemId:id},{});
         
         if(resp!=null && resp.status == 200){
             setProblemHtml(resp.data);
@@ -30,9 +30,8 @@ export default function Coderunner(){
     },[])
 
     const receiveCode = (data)=>{
-        console.log(data);
-        if(data.code === tempCode && data.lang === tempLang){
-            setSameTrigger(!sameTrigger);
+        if(data.code ===tempCode && data.lang ===tempLang){
+            setSametrigger(!sametrigger);
         }else{
             setTempCode(data.code);
             setTempLang(data.lang);
@@ -55,7 +54,7 @@ export default function Coderunner(){
                     <Code trigger={trigger} sendCode={receiveCode}/>
                 </div>
                 <div className="actions">
-                    <Actions problemId={problemId} tempCode={tempCode} tempLang={tempLang} sendRun={tiggerRunCode} sameTrigger={sameTrigger}/>
+                    <Actions problemId={problemId} tempCode={tempCode} tempLang={tempLang} sametrigger={sametrigger} sendRun={tiggerRunCode} />
                 </div>
             </div>
         </div>

@@ -5,8 +5,8 @@ import { getCokkie } from "../../../utils/common";
 export default function Actions(props){
 
     const [loading,setLoading] = useState(null);
-    const [flg,setFlg] = useState(false);
     const [input,setInput] = useState("");
+    const [output,setOutput] = useState("");
 ;
     const handleRun = ()=>{
         setLoading("run");
@@ -19,26 +19,30 @@ export default function Actions(props){
     }
 
     const runCodeApi = async ()=>{
+        const user = await getCokkie("email");
         let data = {
-            userId: await getCokkie("email"),
+            userId: user,
             code:props.tempCode,
             lang:props.tempLang,
             input:input
         }
 
-        console.log("run",data);
+        // console.log("run",data);
 
-        // const resp = await codenest.post('http://localhost:4000/codenest/cses/runCode',data,{});
+        const resp = await codenest.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/cses/runCode',data,{});
     
-        // if(resp!=null && resp.status == 200){
-        //     console.log(resp);
-        // }
+        if(resp!=null && resp.status == 200){
+            setOutput(JSON.stringify(resp.data));
+        }
+        setLoading(null);
     }
 
     const submitCodeApi = async () =>{
 
+        const user = await getCokkie("email");
+
         let data = {
-            userId: await getCokkie("email"),
+            userId: user,
             problemId:props.problemId,
             code:props.tempCode,
             lang:props.tempLang
@@ -46,34 +50,44 @@ export default function Actions(props){
 
         console.log("submit",data);
 
-        // const resp = await codenest.post('http://localhost:4000/codenest/cses/submitProblem',data,{});
+        const resp = await codenest.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/cses/submitProblem',data,{});
+
+        console.log(resp);
     
-        // if(resp!=null && resp.status == 200){
-        //     console.log(resp);
-        // }
+        if(resp!=null && resp.status == 200){
+            setOutput(JSON.stringify(resp.data));
+        }
+        setLoading(null);
     }
 
     useEffect(()=>{
-        console.log(props.tempCode!="");
-        if(props.tempCode!=""){
+        var type = loading;
+        if(props.tempCode!=undefined && props.tempCode!="" && props.tempLang!="" && props.tempLang!=undefined){
             var type = loading;
-            setLoading(null);
             if(type == "run"){
                 runCodeApi();
             }else{
                 submitCodeApi();
             }
+        }else{
+            setLoading(null);
         }
     },[props.tempCode,props.tenmpLang])
 
     useEffect(()=>{
-
-        setLoading(null);
-        if(props.sameTrigger!=""){
-            setFlg(true);
-            setTimeout(()=>setFlg(false),2000);
+        var type = loading;
+        
+        if(props.tempCode!="" && props.tempCode!=undefined){
+            
+            if(type == "run"){
+                runCodeApi();
+            }else{
+                submitCodeApi();
+            }   
+        }else{
+            setLoading(null);
         }
-    },[props.sameTrigger])
+    },[props.sametrigger])
 
     return (
         <div className="actions">
@@ -89,16 +103,16 @@ export default function Actions(props){
                         <button onClick={handleSubmit}>Sumit</button>
                     </div>
 
-                    {(flg)?(
-                        <div>Same Code Executed.</div>
-                    ):(
-                        <div>
-                            <input
-                            type="text"
-                            onChange={(e)=>setInput(e.target.value)}
-                            />
-                        </div>
-                    )}
+                    <input
+                        type="text"
+                        name="input"
+                        value={input}
+                        onChange={(e) => setInput(e.target.value)}
+                        placeholder="input"
+                    />
+                    <div>
+                        {output};
+                    </div>
                 </div>
             )}
             
