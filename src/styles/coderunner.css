@@ -45,7 +45,7 @@
     border-top-right-radius: 5px;
 }
 .langDropDown{
-    position: fixed;
+    position: absolute;
     max-height: 100px;
     background-color: white;
     overflow:scroll;
@@ -63,4 +63,107 @@
 }
 .singleLang:hover{
     background-color: whitesmoke;
+}
+.actions{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    margin-top: 4px;
+}
+.output{
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    margin-top: 5px;
+}
+.stdout{
+    width: 70%;
+    border: 2px solid white;
+    border-radius: 4px;
+    padding: 10px;
+    overflow: scroll;
+}
+.out-card{
+    width: 30%;
+    padding: 5px;
+    margin-left: 10px;
+    border: 2px solid white;
+    border-radius: 4px;
+}
+.action-buttons{
+    width: 100%;
+    margin-top: 5px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: rebeccapurple; */
+}
+.prob-input{
+    width: 70%;
+    margin-right: 10px;
+    height: 50px;
+    padding: 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+}
+.run-but{
+    min-width: 80px;
+    width: 11%;
+    height: 40px;
+    margin-right: 10px;
+    display: flex;
+    justify-content:space-evenly;
+    align-items: center;
+    font-size: 18px;
+    border: 1px solid rgb(23, 173, 232);
+    color: rgb(23, 173, 232);
+    background-color: inherit;
+    border-radius: 5px;
+}
+.run-but:hover{
+    cursor: pointer;
+    background-color: rgba(23, 173, 232, 0.585);
+}
+.submit-but{
+    min-width: 100px;
+    width: 13%;
+    height: 40px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 18px;
+    align-items: center;
+    border: 1px solid rgb(47, 255, 85);
+    color: rgb(47, 255, 85);
+    background-color: inherit;
+    border-radius: 5px;
+}
+.submit-but:hover{
+    cursor: pointer;
+    background-color: rgba(47, 255, 85, 0.52);
+}
+.direc-button{
+    min-width:25px;
+    font-size: 20px;
+    font-weight: bold;
+    width: 4%;
+    height: 40px;
+    border: 4px;
+    border: 1px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    background-color: inherit;
+    border-radius: 5px;
+}
+.direc-button:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.476);
+}
+.loading-login2{
+    width: 300px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }

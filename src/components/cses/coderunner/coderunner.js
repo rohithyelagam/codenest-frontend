@@ -7,6 +7,7 @@ import Code from "./code";
 import Actions from "./actions";
 import { LinearProgress } from "@mui/material";
 
+
 export default function Coderunner(){
 
     const [searchParams] = useSearchParams();
@@ -23,6 +24,7 @@ export default function Coderunner(){
     const [allLang,setAllLang] = useState(["CPP","Java","Python"]);
     const [themeFlg,setThemeFlg] = useState(false);
     const [allTheme,setAllTheme] = useState(["light","dark"]);
+    const [height,setHeight] = useState("650px");
 
     const getProblem = async (id,name)=>{
         setProblemId(id);
@@ -39,12 +41,20 @@ export default function Coderunner(){
         getProblem(searchParams.get("id"),searchParams.get("name"));
     },[])
 
-    const receiveCode = (data)=>{
-        if(data.code ===tempCode && data.lang ===tempLang){
+    const receiveCode = (code)=>{
+        if(code === tempCode ){
             setSametrigger(!sametrigger);
         }else{
-            setTempCode(data.code);
-            setTempLang(data.lang);
+            setTempCode(code);
+        }
+    }
+
+    const chngHeight = (flg)=>{
+    
+        if(flg){
+            setHeight("750px");
+        }else{
+            setHeight("750px");
         }
     }
 
@@ -106,10 +116,10 @@ export default function Coderunner(){
                                 </div>
                             </div>
                             <div className="code">
-                                <Code tempLang={tempLang} trigger={trigger} tempTheme={tempTheme} sendCode={receiveCode}/>
+                                <Code tempLang={tempLang} trigger={trigger} tempTheme={tempTheme} height={height} sendCode={receiveCode} />
                             </div>
                             <div className="actions">
-                                <Actions problemId={problemId} tempCode={tempCode} tempLang={tempLang} sametrigger={sametrigger} sendRun={tiggerRunCode} />
+                                <Actions problemId={problemId} tempCode={tempCode} tempLang={tempLang} sametrigger={sametrigger} sendRun={tiggerRunCode} changeHeight={chngHeight}/>
                             </div>
                         </div>
                     </div>

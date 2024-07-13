@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import codenest from "../../../services/codenest";
 import { getCokkie } from "../../../utils/common";
+import RunCodeIcon from '@mui/icons-material/Code';
+import SendIcon  from "@mui/icons-material/Send";
+import { LinearProgress } from "@mui/material";
 
 export default function Actions(props){
 
     const [loading,setLoading] = useState(null);
     const [input,setInput] = useState("");
     const [output,setOutput] = useState("");
+    const [status,setStatus] = useState("");
+    const [resFlg,setResFlg] = useState(false);
 ;
     const handleRun = ()=>{
         setLoading("run");
+        props.changeHeight(true);
         props.sendRun();
     }
 
@@ -27,13 +33,14 @@ export default function Actions(props){
             input:input
         }
 
-        // console.log("run",data);
-
         const resp = await codenest.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/cses/runCode',data,{});
     
         if(resp!=null && resp.status == 200){
-            setOutput(JSON.stringify(resp.data));
+            setOutput(resp.data.message.output);
+            setStatus(resp.data.message.code);
+            setResFlg(true);
         }
+        
         setLoading(null);
     }
 
@@ -48,19 +55,22 @@ export default function Actions(props){
             lang:props.tempLang
         }
 
-        console.log("submit",data);
-
         const resp = await codenest.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/cses/submitProblem',data,{});
-
-        console.log(resp);
     
         if(resp!=null && resp.status == 200){
-            setOutput(JSON.stringify(resp.data));
+            setOutput(resp.data.message.output);
+            setResFlg(true);
         }
+        
         setLoading(null);
     }
 
     useEffect(()=>{
+        props.changeHeight(resFlg);
+    },[resFlg]);
+
+    useEffect(()=>{
+        console.log("different trigger");
         var type = loading;
         if(props.tempCode!=undefined && props.tempCode!="" && props.tempLang!="" && props.tempLang!=undefined){
             var type = loading;
@@ -75,6 +85,7 @@ export default function Actions(props){
     },[props.tempCode,props.tenmpLang])
 
     useEffect(()=>{
+        console.log("sametrigger");
         var type = loading;
         
         if(props.tempCode!="" && props.tempCode!=undefined){
@@ -90,32 +101,46 @@ export default function Actions(props){
     },[props.sametrigger])
 
     return (
-        <div className="actions">
+    <div className="actions">
+       
 
-            {(loading) ? (
-                <div>Loading</div>
-                ) : (
-                <div>
-                    <div>
-                        <button onClick={handleRun}>Run</button>
-                    </div>
-                    <div>
-                        <button onClick={handleSubmit}>Sumit</button>
-                    </div>
-
-                    <input
-                        type="text"
-                        name="input"
-                        value={input}
-                        onChange={(e) => setInput(e.target.value)}
-                        placeholder="input"
-                    />
-                    <div>
-                        {output};
-                    </div>
-                </div>
-            )}
+        <div className="action-buttons">
             
+            <textarea
+            className="prob-input"
+                type="text"
+                name="input"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="input"
+            />
+                <button className="run-but" onClick={handleRun}><RunCodeIcon/> Run</button>
+                <button className="submit-but" onClick={handleSubmit}><SendIcon/> Submit</button>
+                <button className="direc-button" onClick={()=>setResFlg(!resFlg)}>
+                    {(resFlg)?(<div>&darr;</div>):(<div> &uarr;</div>)}
+                </button>
         </div>
+        {(resFlg)?(
+            <div className="output">
+                <div className="stdout">stdout : {output}</div>
+                <div className="out-card">
+                    <div className="status">Status : {status}</div>
+                    <div className="langueg">language : {props.tempLang}</div>
+                </div>
+            </div>
+        ):(
+            <div>
+                {(loading)?(
+                     <div className="loading-login2">
+                     <LinearProgress />
+                   </div>
+                ):(
+                    <div></div>
+                )}
+            </div>
+        )}
+    </div>
     )
 }
+
+
