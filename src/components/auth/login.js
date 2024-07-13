@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { LinearProgress } from '@mui/material';
 import axios from "axios";
 import "../../styles/login.css";
-import codenest from "../../services/codenest";
 import { useNavigate } from "react-router-dom";
 import { addCokkie, removeCokkie } from "../../utils/common";
 
@@ -55,7 +54,9 @@ function Login() {
 
     <div className="login">
       {(loading) ? (
-        <div className="loading-login"><LinearProgress /></div>
+        <div className="loading-login">
+          <LinearProgress />
+        </div>
       ) : (
         <div className="login-wrapper" onClick={() => setInvalid(false)}>
 
@@ -87,7 +88,7 @@ function Login() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="password"
-
+                  autoComplete="off"
                 />
               </div>
 

@@ -4,6 +4,7 @@
     align-items: center;
     padding-top: 50px;
     padding-bottom: 50px;
+    margin-top: 100px;
 }
 .forgot-des{
     text-align: center;
@@ -44,7 +45,6 @@
 .email>input{
     width: 250px;
     height: 35px;
-    /* font-size: 16px; */
     padding-left: 10px;
     border: none;
     background-color: #f2f2f2;
@@ -54,7 +54,6 @@
 .password>input{
     width: 250px;
     height: 35px;
-    /* font-size: 16px; */
     padding-left: 10px;
     background-color: #f2f2f2;
     border: none;
@@ -150,7 +149,6 @@
     font-size: 40px;
     caret-color: transparent;
     letter-spacing: 8px;
-    /* padding: 10px; */
     text-align: center;
 }
 .resend-otp>a{

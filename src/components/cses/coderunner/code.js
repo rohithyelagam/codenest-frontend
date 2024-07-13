@@ -3,11 +3,12 @@ import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark, vscodeLight } from "@uiw/codemirror-theme-vscode";
 import { useState } from "react";
 
-    export default function Code({trigger,sendCode}){
+    export default function Code({trigger,sendCode,tempLang,tempTheme}){
 
     const [code,setCode] = useState("");
-    const [lang,setLang] = useState("CPP");
-    const [theme,setTheme] = useState("light");
+    const [lang,setLang] = useState(tempLang);
+    const [color,setColor] = useState();
+    const [theme,setTheme] = useState(tempTheme);
 
     const handleChange = (e)=>{
         setCode(e);
@@ -16,12 +17,26 @@ import { useState } from "react";
     useEffect(()=>{
         sendCode({code:code,lang:lang});
     },[trigger])
+
+    useEffect(()=>{
+        setTheme(tempTheme);
+        if(tempTheme == "light"){
+            setColor("black");
+        }else{
+            setColor("white");
+        }
+    },[tempTheme])
+
+    useEffect(()=>{
+        setLang(tempLang);
+    },[tempLang])
     
     return (
         <CodeMirror
         onChange={(e)=>handleChange(e)}
-        height="700px"
+        height="600px"
         theme={theme}
+        style={{color:color}}
         />
     )
 }

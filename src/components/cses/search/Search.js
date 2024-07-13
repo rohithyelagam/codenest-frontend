@@ -2,7 +2,7 @@ import { useCallback, useState } from "react"
 import Problem from "./Problem";
 import codenest from "../../../services/codenest";
 import { debounce } from "lodash";
-
+import "../../../styles/search.css"
 
 export default function Search(){
 
@@ -18,26 +18,23 @@ export default function Search(){
     }
 
     const debouncedSearch = useCallback(
-        debounce((term) => searchText(term), 300),
+        debounce((term) => searchText(term), 200),
         []
       );
 
     return (
-        <div className="search">
-            <div className="title">Search any CSES Problem</div>
+        <div className="search flex-col">
+            <div className="title2">Search any CSES Problem</div>
             <div className="search-bar">
                 <input
                     type="text"
                     onChange={(e)=>debouncedSearch(e.target.value)}
                 />
             </div>
-            <div>{searchText}</div>
-            <div className="problems-container">
-                <div className="problems-list">
-                    {problems.map(p=>(
-                        <div key={p.link}><Problem problem={p}/></div>
-                    ))}
-                </div>
+            <div className="problems-container flex-col">
+                {problems.map(p=>(
+                    <div key={p.link}><Problem problem={p}/></div>
+                ))}
             </div>
         </div>
     )

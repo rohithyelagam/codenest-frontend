@@ -1,9 +1,68 @@
 .flex-row{
     display: flex;
     flex-direction: row;
+    align-items:center;
+    justify-content:space-around;
 }
 
 .flex-col{
     display: flex;
     flex-direction: column;
+    align-items: center;
+}
+.header{
+    width: 100%;
+}
+.main{
+    color: white;
+}
+.title{
+    font-size:50px;
+    font-weight:400;
+    text-shadow: 2px 2px rgb(80, 164, 255);
+}
+
+.title2{
+    font-size:25px;
+    font-weight:400;
+    padding: 30px;
+}
+.link{
+    font-size:25px;
+    font-weight:200;
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+}
+.link:hover{
+    color: rgb(23, 173, 232);
+}
+.button1{
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    background-color: inherit;
+    outline: none;
+    border: none;
+    color: white;
+    font-size:30px;
+    border: 1px solid inherit;
+}
+.button1:hover{
+    background-color: rgb(23, 173, 232);
+    border-radius: 5px;
+}
+.header{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.error-container {
+    text-align: center;
+}
+  
+.error-content {
+    color: white;
+    padding: 20px;
 }

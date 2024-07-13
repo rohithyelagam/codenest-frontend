@@ -9,16 +9,25 @@ export default function Problem(props){
     const navigator = useNavigate();
 
     const handleProblem = (e)=>{
-        navigator(`/execute?id=${prob.link.substr(17)}`);
+        navigator(`/execute?id=${prob.link.substr(17)}&name=${prob.name}`);
     }
 
     return (
-        <div className="Problem">
-            <div className="problem-contianer" id={prob.link} style={{"border":"1px solid black","margin":"5px","width":"500px","cursor":"pointer"}} onClick={handleProblem}>
-                <div className="name"><h1>{prob.name}</h1></div>
-                <div className="category">{prob.category}</div>
-                <div className="submissions">{prob.detail}</div>
-            </div>
+        <div className="Problem" id={prob.link} onClick={handleProblem}>
+                <div className="left">
+                    <div className="problem-title">
+                        {prob.name}
+                    </div>
+                    
+                </div>
+                <div className="right">
+                <div className="category">
+                    {prob.category}
+                </div>
+                <div className="submissions">
+                    {prob.detail}
+                </div>
+                </div>
         </div>
     )
 }

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import {LinearProgress} from '@mui/material';
 import axios from "axios";
 import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
