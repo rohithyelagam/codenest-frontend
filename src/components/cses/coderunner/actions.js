@@ -72,7 +72,6 @@ export default function Actions(props){
     },[resFlg]);
 
     useEffect(()=>{
-        console.log("different trigger");
         var type = loading;
         if(props.tempCode!=undefined && props.tempCode!="" && props.tempLang!="" && props.tempLang!=undefined){
             var type = loading;
@@ -87,7 +86,6 @@ export default function Actions(props){
     },[props.tempCode,props.tenmpLang])
 
     useEffect(()=>{
-        console.log("sametrigger");
         var type = loading;
         
         if(props.tempCode!="" && props.tempCode!=undefined){
@@ -101,7 +99,7 @@ export default function Actions(props){
             setLoading(null);
         }
     },[props.sametrigger])
-
+    
     return (
     <div className="actions">
        

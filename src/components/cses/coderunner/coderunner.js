@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom";
 import codenest from "../../../services/codenest";
 import "../../../styles/coderunner.css";
@@ -26,6 +26,8 @@ export default function Coderunner(){
     const [allTheme,setAllTheme] = useState(["light","dark"]);
     const [height,setHeight] = useState("650px");
 
+    let node = React.createRef();
+
     const getProblem = async (id,name)=>{
         setProblemId(id);
         setProblemName(name);
@@ -35,7 +37,16 @@ export default function Coderunner(){
             setProblemHtml(resp.data);
         }
         setLoading(false);
+        await renderMath();
     }
+
+    const renderMath = async () => {
+        await window.MathJax.Hub.Queue([
+          "Typeset", 
+          window.MathJax.Hub,
+          node.current
+       ]);
+      }
 
     useEffect(()=>{
         getProblem(searchParams.get("id"),searchParams.get("name"));
@@ -85,7 +96,7 @@ export default function Coderunner(){
             {(loading)?(
                 <div className="loading-login"><LinearProgress /></div>
             ):(
-                <div className="runner">
+                <div className="runner" ref={node}>
                     <div className="runner-left">
                         <div className="runner-contianer">
                             <div className="problem-title">
