@@ -21,6 +21,7 @@ export default function Actions(props){
 
     const handleSubmit = ()=>{
         setLoading("submit");
+        props.changeHeight(true);
         props.sendRun();
     }
 
@@ -52,7 +53,8 @@ export default function Actions(props){
             userId: user,
             problemId:props.problemId,
             code:props.tempCode,
-            lang:props.tempLang
+            lang:props.tempLang,
+            problemName:props.problemName
         }
 
         const resp = await codenest.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/cses/submitProblem',data,{});
@@ -120,7 +122,7 @@ export default function Actions(props){
                     {(resFlg)?(<div>&darr;</div>):(<div> &uarr;</div>)}
                 </button>
         </div>
-        {(resFlg)?(
+        {(resFlg && !loading)?(
             <div className="output">
                 <div className="stdout">stdout : {output}</div>
                 <div className="out-card">

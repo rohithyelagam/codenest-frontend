@@ -51,9 +51,9 @@ export default function Home() {
             <div className="header flex-row">
                 <div className="left title">CodeNest</div>
                 <div className="right flex-row">
-                    <Link to={``} className="link">search</Link>
-                    <Link to={`submissions`} className="link">submissions</Link>
-                    <Link to={``} className="link">cfvis</Link>
+                    <Link to={``} className="link">Problems</Link>
+                    <Link to={`submissions`} className="link">Submissions</Link>
+                    {/* <Link to={``} className="link"></Link> */}
                     <div>
                         <button type="submit" className="button1" onClick={()=>handleLogout()}>&#x23FB;</button>
                     </div>

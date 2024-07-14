@@ -52,7 +52,7 @@ export default function Coderunner(){
     const chngHeight = (flg)=>{
     
         if(flg){
-            setHeight("750px");
+            setHeight("650px");
         }else{
             setHeight("750px");
         }
@@ -119,7 +119,7 @@ export default function Coderunner(){
                                 <Code tempLang={tempLang} trigger={trigger} tempTheme={tempTheme} height={height} sendCode={receiveCode} />
                             </div>
                             <div className="actions">
-                                <Actions problemId={problemId} tempCode={tempCode} tempLang={tempLang} sametrigger={sametrigger} sendRun={tiggerRunCode} changeHeight={chngHeight}/>
+                                <Actions problemId={problemId} tempCode={tempCode} tempLang={tempLang} sametrigger={sametrigger} problemName={problemName} sendRun={tiggerRunCode} changeHeight={chngHeight}/>
                             </div>
                         </div>
                     </div>
