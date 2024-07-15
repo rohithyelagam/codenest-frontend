@@ -13,8 +13,8 @@ import Submissions from './components/cses/submissions/submissions';
 function App(){
 
     return (
-      <div className="App" style={{color:"white"}}>
-        {/* <Routes>
+      <div className="App">
+        <Routes>
           <Route path='/' element={<Home/>}>
             <Route path='' element={<Search/>}/>
             <Route path='execute' element={<Coderunner />} />
@@ -25,8 +25,7 @@ function App(){
           <Route path='forgot' element={<Forgot/>}/>
           <Route path="otp" element={<OTP/>}/>
           <Route path="*" element={<NotFound/>}/>
-        </Routes> */}
-        testing
+        </Routes>
       </div>
     );
 }
