@@ -63,7 +63,7 @@ function Signup() {
         addCokkie("email",email);
         addCokkie("username",username);
         addCokkie("pswd",password);
-        axios.post('http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/register', {
+        axios.post('https://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/register', {
           username: username,
           email:email,
           password:password
