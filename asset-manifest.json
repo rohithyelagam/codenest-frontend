@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/codenest-frontend/static/css/main.0c41c8b6.css",
-    "main.js": "/codenest-frontend/static/js/main.ec449282.js",
+    "main.js": "/codenest-frontend/static/js/main.e2d399a6.js",
     "index.html": "/codenest-frontend/index.html",
     "main.0c41c8b6.css.map": "/codenest-frontend/static/css/main.0c41c8b6.css.map",
-    "main.ec449282.js.map": "/codenest-frontend/static/js/main.ec449282.js.map"
+    "main.e2d399a6.js.map": "/codenest-frontend/static/js/main.e2d399a6.js.map"
   },
   "entrypoints": [
     "static/css/main.0c41c8b6.css",
-    "static/js/main.ec449282.js"
+    "static/js/main.e2d399a6.js"
   ]
 }
