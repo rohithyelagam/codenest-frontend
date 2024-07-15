@@ -1,20 +1,13 @@
 {
   "files": {
-    "main.css": "/Spark-portal/static/css/main.8e9bf208.chunk.css",
-    "main.js": "/Spark-portal/static/js/main.8cd81cdf.chunk.js",
-    "main.js.map": "/Spark-portal/static/js/main.8cd81cdf.chunk.js.map",
-    "runtime-main.js": "/Spark-portal/static/js/runtime-main.7d375ba6.js",
-    "runtime-main.js.map": "/Spark-portal/static/js/runtime-main.7d375ba6.js.map",
-    "static/js/2.0e8e8f2a.chunk.js": "/Spark-portal/static/js/2.0e8e8f2a.chunk.js",
-    "static/js/2.0e8e8f2a.chunk.js.map": "/Spark-portal/static/js/2.0e8e8f2a.chunk.js.map",
-    "index.html": "/Spark-portal/index.html",
-    "static/css/main.8e9bf208.chunk.css.map": "/Spark-portal/static/css/main.8e9bf208.chunk.css.map",
-    "static/js/2.0e8e8f2a.chunk.js.LICENSE.txt": "/Spark-portal/static/js/2.0e8e8f2a.chunk.js.LICENSE.txt"
+    "main.css": "./static/css/main.0c41c8b6.css",
+    "main.js": "./static/js/main.b65462c2.js",
+    "index.html": "./index.html",
+    "main.0c41c8b6.css.map": "./static/css/main.0c41c8b6.css.map",
+    "main.b65462c2.js.map": "./static/js/main.b65462c2.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.7d375ba6.js",
-    "static/js/2.0e8e8f2a.chunk.js",
-    "static/css/main.8e9bf208.chunk.css",
-    "static/js/main.8cd81cdf.chunk.js"
+    "static/css/main.0c41c8b6.css",
+    "static/js/main.b65462c2.js"
   ]
 }
