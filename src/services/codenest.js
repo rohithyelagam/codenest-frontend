@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getCokkie } from '../utils/common';
 
-// const url = "https://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest";
-const url = "https://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest";
+// const url = "http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest";
+const url = "http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest";
 
 const post = async (endpoint,data,headers) => {
     const token = await getCokkie("token");
