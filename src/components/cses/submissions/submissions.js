@@ -100,6 +100,8 @@ export default function Submissions(){
                     editable={false}
                     readOnly={true}
                     theme={"dark"}
+                    height="700px"
+                    width="800px"
                     />
                     <div className="detail-summary">
                         {detail?.result.output}
