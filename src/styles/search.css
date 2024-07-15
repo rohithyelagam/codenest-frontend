@@ -32,6 +32,17 @@
   width: 500px;
   padding-left: 40px;
 }
+.head-left{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 40px 10px 40px;
+}
+.head-right{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 40px 10px 40px;
+}
 
 .problem-title{
   display: flex;

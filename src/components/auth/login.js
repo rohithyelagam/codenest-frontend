@@ -62,7 +62,6 @@ function Login() {
 
           <div className="login-title">CODENEST</div>
 
-          <form>
             <div className="login-form" >
 
               {(invalid) ? (
@@ -97,7 +96,6 @@ function Login() {
               </div>
 
             </div>
-          </form>
           <div className="login-bottom">
             <div className="forgot-password">
               Forgot{" "}

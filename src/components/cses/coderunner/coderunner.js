@@ -92,7 +92,7 @@ export default function Coderunner(){
     }
 
     return (
-        <div>
+        <div className="runner2">
             {(loading)?(
                 <div className="loading-login"><LinearProgress /></div>
             ):(
@@ -112,15 +112,15 @@ export default function Coderunner(){
                                 <div className="lang">
                                     <button onClick={handleLang}>{tempLang}</button>
                                     <div className="langDropDown" hidden={!langFlg}>
-                                        {allLang.map((lang)=>(
+                                        {allLang.forEach((lang)=>(
                                             <div className="singleLang" onClick={()=>handleLangClose(lang)}>{lang}</div>
                                         ))}
                                     </div>
                                 </div>
                                 <div className="lang">
-                                    <button onClick={handleTheme}>{tempTheme}</button>
+                                    <button onClick={handleTheme} key={problemId}>{tempTheme}</button>
                                     <div className="langDropDown" hidden={!themeFlg}>
-                                        {allTheme.map((lang)=>(
+                                        {allTheme.forEach((lang)=>(
                                             <div className="singleLang" onClick={()=>handleThemeClose(lang)}>{lang}</div>
                                         ))}
                                     </div>

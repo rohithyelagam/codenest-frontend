@@ -12,7 +12,6 @@ export default function Home() {
 
     const checkLoggedIn = async () => {
         const token = await getCokkie("token");
-        console.log("Auth Token : " + token);
 
         if (!token) {
             navigate('/login');
@@ -36,7 +35,6 @@ export default function Home() {
     }, []);
 
     const handleLogout = async () =>{
-        console.log("logged out");
         const email = await getCokkie("email");
         const resp = await codenest.post("http://ec2-43-204-100-120.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/logout",{email:email},{});
         if(resp!=null && resp.status == 200){
@@ -47,13 +45,12 @@ export default function Home() {
     
 
     return (
-        <div className="main flex-col">
-            <div className="header flex-row">
-                <div className="left title">CodeNest</div>
-                <div className="right flex-row">
+        <div className="main">
+            <div className="header">
+                <div className="head-left title">CodeNest</div>
+                <div className="head-right">
                     <Link to={``} className="link">Problems</Link>
                     <Link to={`submissions`} className="link">Submissions</Link>
-                    {/* <Link to={``} className="link"></Link> */}
                     <div>
                         <button type="submit" className="button1" onClick={()=>handleLogout()}>&#x23FB;</button>
                     </div>

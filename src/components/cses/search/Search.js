@@ -23,7 +23,7 @@ export default function Search(){
       );
 
     return (
-        <div className="search flex-col">
+        <div className="search">
             <div className="title2">Search any CSES Problem</div>
             <div className="search-bar">
                 <input
