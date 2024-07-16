@@ -62,7 +62,7 @@ function Login() {
 
           <div className="login-title">CODENEST</div>
 
-            <div className="login-form" >
+            <form className="login-form" >
 
               {(invalid) ? (
                 <div className="invalidmsg">email or password is incorrect!</div>
@@ -95,7 +95,7 @@ function Login() {
                 <button type="submit" onClick={handlesubmit} >Log in</button>
               </div>
 
-            </div>
+            </form>
           <div className="login-bottom">
             <div className="forgot-password">
               Forgot{" "}
