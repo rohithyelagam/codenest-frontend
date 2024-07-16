@@ -37,15 +37,17 @@ export default function Coderunner(){
             setProblemHtml(resp.data);
         }
         setLoading(false);
-        await renderMath();
+        setTimeout(()=>{
+            renderMath();
+        },1000);
     }
 
-    const renderMath = async () => {
-        await window.MathJax.Hub.Queue([
-          "Typeset", 
-          window.MathJax.Hub,
-          node.current
-       ]);
+    const renderMath = () => {
+        window.MathJax.Hub.Queue([
+            "Typeset", 
+            window.MathJax.Hub,
+            node.current
+         ]);
       }
 
     useEffect(()=>{
