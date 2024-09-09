@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { getCokkie } from '../utils/common';
 
-// const url = "http://localhost:4000/codenest";
-const url = "http://localhost:4000/codenest";
+// const url = "http://172.31.2.95:4000/codenest";
+const url = "http://172.31.2.95:4000/codenest";
 
 const post = async (endpoint,data,headers) => {
     const token = await getCokkie("token");

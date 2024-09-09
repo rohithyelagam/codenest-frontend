@@ -34,7 +34,7 @@ export default function Actions(props){
             input:input
         }
 
-        const resp = await codenest.post('http://localhost:4000/codenest/cses/runCode',data,{});
+        const resp = await codenest.post('http://172.31.2.95:4000/codenest/cses/runCode',data,{});
     
         if(resp!=null && resp.status == 200){
             setOutput(resp.data.message.output);
@@ -57,7 +57,7 @@ export default function Actions(props){
             problemName:props.problemName
         }
 
-        const resp = await codenest.post('http://localhost:4000/codenest/cses/submitProblem',data,{});
+        const resp = await codenest.post('http://172.31.2.95:4000/codenest/cses/submitProblem',data,{});
     
         if(resp!=null && resp.status == 200){
             setOutput(resp.data.message.output);

@@ -24,7 +24,7 @@ function Login() {
     }
 
     try {
-      const res = await axios.post('http://localhost:4000/codenest/auth/v1/login', data);
+      const res = await axios.post('http://172.31.2.95:4000/codenest/auth/v1/login', data);
       if (res.data) {
         setInvalid(false);
         setLoading(false);

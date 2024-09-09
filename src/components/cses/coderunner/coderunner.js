@@ -31,7 +31,7 @@ export default function Coderunner(){
     const getProblem = async (id,name)=>{
         setProblemId(id);
         setProblemName(name);
-        const resp = await codenest.post('http://localhost:4000/codenest/cses/getProblem',{problemId:id},{});
+        const resp = await codenest.post('http://172.31.2.95:4000/codenest/cses/getProblem',{problemId:id},{});
         
         if(resp!=null && resp.status == 200){
             setProblemHtml(resp.data);
