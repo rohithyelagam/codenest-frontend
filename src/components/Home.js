@@ -18,7 +18,7 @@ export default function Home() {
             return;
         }
 
-        axios.post('http://172.31.2.95:4000/codenest/auth/v1/validateToken', { token })
+        axios.post('http://ec2-43-204-148-135.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/validateToken', { token })
             .then((resp) => {
                 if (!resp.data.message) {
                     navigate("/login");
@@ -36,7 +36,7 @@ export default function Home() {
 
     const handleLogout = async () =>{
         const email = await getCokkie("email");
-        const resp = await codenest.post("http://172.31.2.95:4000/codenest/auth/v1/logout",{email:email},{});
+        const resp = await codenest.post("http://ec2-43-204-148-135.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/logout",{email:email},{});
         if(resp!=null && resp.status == 200){
             navigate("/login");
         }

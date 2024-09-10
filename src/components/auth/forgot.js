@@ -38,7 +38,7 @@ function Login() {
 
   const handleSubmit2 = ()=>{
     if(handleerr()){
-      axios.post('http://172.31.2.95:4000/codenest/auth/v1/forgot', {
+      axios.post('http://ec2-43-204-148-135.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/forgot', {
         email:email
       }).then((resp)=>{
         setValid(true);

@@ -13,7 +13,7 @@ export default function Submissions(){
     const getSubmissions = async ()=>{
         const userId = await getCokkie("email");
 
-        const resp = await codenest.post('http://172.31.2.95:4000/codenest/cses/getSubmissions',{userId:userId},{});
+        const resp = await codenest.post('http://ec2-43-204-148-135.ap-south-1.compute.amazonaws.com:4000/codenest/cses/getSubmissions',{userId:userId},{});
     
         if(resp!=null && resp.status == 200){
             resp.data.message.sort((a,b)=>{
