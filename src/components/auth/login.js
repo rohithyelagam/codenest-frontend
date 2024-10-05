@@ -37,6 +37,8 @@ function Login() {
     } catch (err) {
       setInvalid(true);
       setLoading(false);
+      setEmail("");
+      setPassword("");
       console.log("invalid credidentials!");
     }
 
