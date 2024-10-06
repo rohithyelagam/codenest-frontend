@@ -31,7 +31,7 @@ function Signup() {
       dec = 1;
     }
     if (email === "") {
-      setEmail_err("1px solid #f81d1d");
+      setEmail_err("Email Adress is Invalid");
       dec = 1;
     } else {
       var n = email.length;
@@ -72,11 +72,11 @@ function Signup() {
             console.log(res.data);
             navigator("/otp");
           } else {
-            setEmail_err("1.2px solid #f81d1d")
+            setEmail_err("user exists already")
             console.log("user exists already");
           }
         }).catch(err=>{
-          setEmail_err(err.message)
+          setEmail_err("user exists already")
           console.log("user exists already");
         })
     }
@@ -122,7 +122,7 @@ function Signup() {
 
             <div className="signup-email">
               <input
-                style={{ border: email_err }}
+                style={{ border: (email_err=="none" || email_err==null)?"none":"1px solid #f81d1d" }}
                 type="text"
                 name="email"
                 value={email}
@@ -131,15 +131,10 @@ function Signup() {
                 onClick={close_errs}
               />
             </div>
-            {(email_err === "none") ? (
+            {(email_err === "none" || email_err==null) ? (
               <div></div>
             ) : (
-              <div>{(email_err[1] === '.') ? (
-                <div className="err">email address is already in use</div>
-              ) : (
-                <div className="err">email address is invalid</div>
-              )}</div>
-
+                <div className="err">{email_err}</div>
             )}
 
             <div className="signup-password">
