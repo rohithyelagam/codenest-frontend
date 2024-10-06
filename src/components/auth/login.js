@@ -4,6 +4,8 @@ import axios from "axios";
 import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import { addCokkie, removeCokkie } from "../../utils/common";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
 function Login() {
 
@@ -11,6 +13,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPswd,setShowPswd] = useState("password");
 
   const navigator = useNavigate();
 
@@ -52,6 +55,14 @@ function Login() {
     navigator("/forgot");
   }
 
+  const changePswd = ()=>{
+    if(showPswd == "password"){
+      setShowPswd("text");
+    }else{
+      setShowPswd("password");
+    }
+  }
+  
   return (
 
     <div className="login">
@@ -84,13 +95,22 @@ function Login() {
 
               <div className="password">
                 <input
-                  type="text"
+                  type={showPswd}
                   name="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e)=>setPassword(e.target.value)}
                   placeholder="password"
                   autoComplete="off"
                 />
+                {(showPswd == "text")?(
+                  <div onClick={changePswd} className="pswdVisibility">
+                    <VisibilityOffOutlinedIcon/>
+                  </div>
+                ):(
+                  <div onClick={changePswd} className="pswdVisibility">
+                    <VisibilityOutlinedIcon/>
+                  </div>
+                )}
               </div>
 
               <div className="submit">

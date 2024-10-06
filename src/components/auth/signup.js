@@ -3,6 +3,9 @@ import axios from "axios";
 import {useNavigate} from 'react-router-dom';
 import {addCokkie} from "../../utils/common";
 import "../../styles/signup.css";
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+
 function Signup() {
 
   const navigator = useNavigate();
@@ -13,6 +16,15 @@ function Signup() {
   const [first_err, setFirst_err] = useState("none");
   const [email_err, setEmail_err] = useState("none");
   const [pswd_err, setPswd_err] = useState("none");
+  const [showPswd,setShowPswd] = useState(false);
+
+  const changePswd = ()=>{
+    if(showPswd == "password"){
+      setShowPswd("text");
+    }else{
+      setShowPswd("password");
+    }
+  }
 
   const handlelogin = () => {
     navigator("/login");
@@ -140,13 +152,22 @@ function Signup() {
             <div className="signup-password">
               <input
                 style={{ border: pswd_err }}
-                type="text"
+                type={showPswd}
                 name="password"
                 value={password}
                 onChange={handleChange}
                 placeholder="password"
                 onClick={close_errs}
               />
+              {(showPswd == "text")?(
+                  <div onClick={changePswd} className="pswdVisibility">
+                    <VisibilityOffOutlinedIcon/>
+                  </div>
+                ):(
+                  <div onClick={changePswd} className="pswdVisibility">
+                    <VisibilityOutlinedIcon/>
+                  </div>
+                )}
             </div>
             {(pswd_err === "none") ? (
               <div></div>

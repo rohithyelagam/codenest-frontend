@@ -40,7 +40,13 @@
     margin-top: 10px;
 }
 .password{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-top: 10px;
+    width: 260px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    background-color: #f2f2f2;
 }
 .email>input{
     width: 250px;
@@ -52,14 +58,12 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .password>input{
-    width: 250px;
+    width: 210px;
     height: 35px;
     padding-left: 10px;
     background-color: #f2f2f2;
     border: none;
     outline:none;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin-bottom: 20px;
 }
 
 .submit{
@@ -174,4 +178,12 @@
     margin-bottom: 10px;
     border-radius: 3px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.pswdVisibility{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f2f2f2;
+    margin-right: 10px;
 }
