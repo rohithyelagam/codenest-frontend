@@ -16,7 +16,7 @@ function Signup() {
   const [first_err, setFirst_err] = useState("none");
   const [email_err, setEmail_err] = useState("none");
   const [pswd_err, setPswd_err] = useState("none");
-  const [showPswd,setShowPswd] = useState(false);
+  const [showPswd,setShowPswd] = useState("text");
 
   const changePswd = ()=>{
     if(showPswd == "password"){
