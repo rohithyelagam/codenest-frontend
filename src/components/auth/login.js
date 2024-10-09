@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LinearProgress } from '@mui/material';
 import axios from "axios";
 import "../../styles/login.css";
 import { useNavigate } from "react-router-dom";
-import { addCokkie, removeCokkie } from "../../utils/common";
+import { addCokkie, removeCokkie, getCokkie } from "../../utils/common";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 
@@ -62,6 +62,28 @@ function Login() {
       setShowPswd("password");
     }
   }
+
+  const checkLoggedIn = async () => {
+    const token = await getCokkie("token");
+
+    if (!token) {
+        return;
+    }
+
+    axios.post('http://ec2-43-204-148-135.ap-south-1.compute.amazonaws.com:4000/codenest/auth/v1/validateToken', { token })
+        .then((resp) => {
+            if (resp.data.message) {
+              navigator("/");
+            }
+        })
+        .catch((err) => {
+        });
+  };
+
+  useEffect(()=>{
+    checkLoggedIn();
+  },[])
+
   
   return (
 
